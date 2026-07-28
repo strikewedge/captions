@@ -1,0 +1,20 @@
+# Social caption system
+
+Caption overlay builder for Strike Wedge reels and shorts.
+
+Type a headline, pick a layout and a colour, download it as a transparent
+1080 x 1920 PNG, and drop it over the clip in CapCut, Premiere or Canva.
+
+**Live: https://strikewedge.github.io/captions**
+
+- Four layouts: Stacked, Highlight block, Kicker, Full colour.
+- Text and accent colour picked from the brand palette (beige, lilac, orange, green).
+- Backdrop switcher (turf, dark, bright) to check contrast before committing. Preview only, never exported.
+- Wrap a word in asterisks to make it the accent word, e.g. `Never *scoop* the ball again`.
+- Safe zones show the Reels and TikTok interface margins: top 250px, bottom 420px, sides 60px.
+
+Everything is in `index.html`. Fonts (Work Sans, IBM Plex Mono) are embedded, so
+it works offline and has no external dependencies.
+
+The brand rules behind it live in the knowledge base at `brand/visual.md`
+(repo `strikewedge/sw-knowledge`).
