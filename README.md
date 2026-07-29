@@ -11,6 +11,7 @@ Type a headline, pick a layout and a colour, download it as a transparent
 - Text and accent colour picked from the brand palette (beige, lilac, orange, green).
 - Backdrop switcher (turf, dark, bright) to check contrast before committing. Preview only, never exported.
 - Wrap a word in asterisks to make it the accent word, e.g. `Never *scoop* the ball again`.
+- Press Enter in the headline box to break a line exactly where you want it. Anything still too wide for the text box wraps on its own.
 - Safe zones show the Reels and TikTok interface margins: top 250px, bottom 420px, sides 60px.
 
 Everything is in `index.html`. Fonts (Work Sans, IBM Plex Mono) are embedded, so

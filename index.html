@@ -56,12 +56,13 @@ h1{
 @media (max-width:760px){ .controls{grid-template-columns:1fr} }
 .group{display:flex; flex-direction:column; gap:9px; min-width:0}
 .group > label, .group > .glabel{color:var(--fg-soft); margin:0}
-.group input[type="text"]{
+.group input[type="text"], .group textarea{
   font-family:'Work Sans',sans-serif; font-size:1rem; font-weight:600;
   color:var(--fg); background:transparent; padding:11px 14px;
   border:1px solid var(--rule); border-radius:10px; width:100%;
+  line-height:1.45; resize:none; overflow:hidden;
 }
-.group input[type="text"]:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-color:transparent}
+.group input[type="text"]:focus-visible, .group textarea:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-color:transparent}
 .hint{font-size:.82rem; color:var(--fg-soft); line-height:1.4; margin:0}
 
 .swatches{display:flex; flex-wrap:wrap; gap:8px}
@@ -239,8 +240,8 @@ li{margin-bottom:7px}
 
   <div class="group">
     <label class="mono" for="hl">Headline</label>
-    <input id="hl" type="text" value="Never *scoop* the ball again" autocomplete="off" spellcheck="false">
-    <p class="hint">Wrap a word in asterisks to make it the accent word.</p>
+    <textarea id="hl" rows="1" autocomplete="off" spellcheck="false">Never *scoop* the ball again</textarea>
+    <p class="hint">Press Enter to break a line exactly where you want it. Wrap a word in asterisks to make it the accent word. Anything still too wide for the box wraps on its own.</p>
   </div>
 
   <div class="group">
@@ -413,6 +414,7 @@ li{margin-bottom:7px}
         <li>Three to six words. If it runs past three lines it is a caption, not a headline.</li>
         <li>One idea per post, second person, no exclamation marks.</li>
         <li>Accent the word that names the problem: scoop, fat, thin, heel, short.</li>
+        <li>Break the lines yourself when the automatic wrap splits a phrase badly. Keep the words that belong together on the same line, and put the accent word where the eye lands first.</li>
       </ul>
     </div>
   </div>
@@ -507,25 +509,40 @@ li{margin-bottom:7px}
     });
   }
 
+  // A manual break (Enter in the box) starts a new line. Anything still too
+  // wide for the text box wraps inside that line as before.
+  function manualLines(text){
+    return text.split('\n').filter(function(l){ return l.trim() !== ''; });
+  }
+
   function render(){
     var raw = input.value || '';
     targets.forEach(function(el){
       var mode = el.dataset.case === 'sentence' ? 'sentence' : 'none';
       el.textContent = '';
-      runs(cased(raw, mode)).forEach(function(r){
-        if(r.a){
-          var span = document.createElement('span');
-          span.className = 'hl';
-          span.textContent = r.t;
-          el.appendChild(span);
-        } else {
-          el.appendChild(document.createTextNode(r.t));
-        }
+      manualLines(cased(raw, mode)).forEach(function(lineText){
+        var ln = document.createElement('div');
+        runs(lineText).forEach(function(r){
+          if(r.a){
+            var span = document.createElement('span');
+            span.className = 'hl';
+            span.textContent = r.t;
+            ln.appendChild(span);
+          } else {
+            ln.appendChild(document.createTextNode(r.t));
+          }
+        });
+        el.appendChild(ln);
       });
     });
   }
 
-  input.addEventListener('input', function(){ render(); save(); });
+  function autoGrow(){
+    input.style.height = 'auto';
+    input.style.height = (input.scrollHeight + 2) + 'px';
+  }
+
+  input.addEventListener('input', function(){ autoGrow(); render(); save(); });
 
   /* ---------- controls ---------- */
 
@@ -702,7 +719,10 @@ li{margin-bottom:7px}
     var lineBox = spec.size * spec.lh;
     var half = (lineBox - (asc + desc)) / 2;
     var padX = spec.block ? spec.block.padX : 0;
-    var lines = wrapLines(ctx, tokenise(runs(cased(raw, spec.case))), spec.w, padX);
+    var lines = [];
+    manualLines(cased(raw, spec.case)).forEach(function(lineText){
+      lines = lines.concat(wrapLines(ctx, tokenise(runs(lineText)), spec.w, padX));
+    });
 
     lines.forEach(function(line, i){
       var base = top + half + asc + i * lineBox;
@@ -834,11 +854,12 @@ li{margin-bottom:7px}
     var b = document.createElement('button');
     b.type = 'button';
     b.className = 'preset';
-    b.textContent = text.replace(/\*/g, '');
+    // Chips stay on one line, so a manual break shows as a slash.
+    b.textContent = text.replace(/\*/g, '').replace(/\n+/g, ' / ');
     b.title = text;
     b.addEventListener('click', function(){
       input.value = text;
-      render(); save();
+      autoGrow(); render(); save();
       input.focus();
     });
     strip.appendChild(b);
@@ -904,6 +925,7 @@ li{margin-bottom:7px}
     b.setAttribute('aria-pressed', String(BACKDROPS[i].key === state.back));
   });
   applyColours();
+  autoGrow();
   render();
   drawRecent();
 })();
