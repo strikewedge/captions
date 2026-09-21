@@ -145,6 +145,19 @@ button.preset:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
 }
 .a .hl{color:var(--cap-accent)}
 
+/* E stacked, smaller: same face as A, sized so two words sit on one line */
+.e .cap{top:calc(300 * var(--u)); width:calc(900 * var(--u))}
+.e .line{
+  font-weight:900; font-size:calc(100 * var(--u)); line-height:.92;
+  letter-spacing:-.035em; text-transform:uppercase; color:var(--cap-body);
+  text-shadow:0 calc(3 * var(--u)) calc(22 * var(--u)) rgba(0,0,0,.45);
+}
+.e .hl{color:var(--cap-accent)}
+
+/* caps off: A, B, D and E render the line as typed. C is sentence case by design. */
+.board[data-caps="off"] .a .line, .board[data-caps="off"] .b .line,
+.board[data-caps="off"] .d .line, .board[data-caps="off"] .e .line{text-transform:none}
+
 /* B highlight block */
 .b .cap{top:calc(310 * var(--u)); width:calc(800 * var(--u))}
 .b .line{
@@ -233,7 +246,7 @@ li{margin-bottom:7px}
 <header>
   <p class="eyebrow mono">Strike Wedge &middot; reels and shorts</p>
   <h1>Social caption system.</h1>
-  <p class="lede">Type a line, choose a layout and a colour, then download it as a transparent 1080 &times; 1920 PNG and drop it over the clip. Four layouts, the brand palette, and Work Sans throughout. Every frame below is a true 1080 &times; 1920 canvas, so the numbers on each card are the literal pixel values if you would rather build the text layer by hand.</p>
+  <p class="lede">Type a line, choose a layout and a colour, then download it as a transparent 1080 &times; 1920 PNG and drop it over the clip. Five layouts, the brand palette, and Work Sans throughout. Every frame below is a true 1080 &times; 1920 canvas, so the numbers on each card are the literal pixel values if you would rather build the text layer by hand.</p>
 </header>
 
 <div class="controls">
@@ -248,8 +261,10 @@ li{margin-bottom:7px}
     <p class="glabel mono">Backdrop &middot; for checking contrast only</p>
     <div class="segmented" id="backStrip"></div>
     <div class="segmented" style="margin-top:4px">
+      <button class="tog" id="capsBtn" type="button" aria-pressed="true">Caps</button>
       <button class="tog" id="safeBtn" type="button" aria-pressed="false">Safe zones</button>
     </div>
+    <p class="hint">Caps off renders the line exactly as you typed it. Kicker (C) stays sentence case either way.</p>
   </div>
 
   <div class="group">
@@ -290,7 +305,7 @@ li{margin-bottom:7px}
       <span class="dim mono">1080 &times; 1920 &middot; transparent</span>
     </div>
     <div class="spec">
-      <div class="row"><span class="k">Type</span><span class="v">Work Sans 900, 128 px, uppercase</span></div>
+      <div class="row"><span class="k">Type</span><span class="v">Work Sans 900, 128 px, <span data-case-label>uppercase</span></span></div>
       <div class="row"><span class="k">Metrics</span><span class="v">Line height 0.90 &middot; tracking &minus;3.5%</span></div>
       <div class="row"><span class="k">Colour</span><span class="v" data-colour></span></div>
       <div class="row"><span class="k">Position</span><span class="v">x 72 &middot; y 300 &middot; box 760 wide</span></div>
@@ -313,7 +328,7 @@ li{margin-bottom:7px}
       <span class="dim mono">1080 &times; 1920 &middot; transparent</span>
     </div>
     <div class="spec">
-      <div class="row"><span class="k">Type</span><span class="v">Work Sans 900, 118 px, uppercase</span></div>
+      <div class="row"><span class="k">Type</span><span class="v">Work Sans 900, 118 px, <span data-case-label>uppercase</span></span></div>
       <div class="row"><span class="k">Metrics</span><span class="v">Line height 1.18 &middot; tracking &minus;3%</span></div>
       <div class="row"><span class="k">Colour</span><span class="v" data-colour></span></div>
       <div class="row"><span class="k">Block</span><span class="v">Pad 18 side / 12 base &middot; radius 10</span></div>
@@ -360,13 +375,36 @@ li{margin-bottom:7px}
       <span class="dim mono">1080 &times; 1920 &middot; transparent</span>
     </div>
     <div class="spec">
-      <div class="row"><span class="k">Type</span><span class="v">Work Sans 900, 136 px, uppercase</span></div>
+      <div class="row"><span class="k">Type</span><span class="v">Work Sans 900, 136 px, <span data-case-label>uppercase</span></span></div>
       <div class="row"><span class="k">Metrics</span><span class="v">Line height 0.88 &middot; tracking &minus;4.2%</span></div>
       <div class="row"><span class="k">Colour</span><span class="v" data-colour></span></div>
       <div class="row"><span class="k">Scrim</span><span class="v">#0B2E20 62% to 0%, top 1020 px</span></div>
       <div class="row"><span class="k">Position</span><span class="v">x 72 &middot; y 280 &middot; box 820 wide</span></div>
     </div>
     <p class="note">Biggest, and the colours swap: the whole line takes the accent and the marked word drops back to the text colour. The scrim guarantees legibility on any footage.</p>
+  </article>
+
+  <article class="opt e">
+    <div class="tag"><span class="n mono">E</span><span class="t">Stacked, smaller</span></div>
+    <div class="frame">
+      <div class="stage">
+        <div class="back"></div><div class="grain"></div><div class="vig"></div>
+        <div class="cap"><div class="line" data-text></div></div>
+        <div class="safe"><div class="band top"></div><div class="band bot"></div><div class="side l"></div><div class="side r"></div></div>
+      </div>
+    </div>
+    <div class="acts">
+      <button class="dl" type="button">Download PNG</button>
+      <span class="dim mono">1080 &times; 1920 &middot; transparent</span>
+    </div>
+    <div class="spec">
+      <div class="row"><span class="k">Type</span><span class="v">Work Sans 900, 100 px, <span data-case-label>uppercase</span></span></div>
+      <div class="row"><span class="k">Metrics</span><span class="v">Line height 0.92 &middot; tracking &minus;3.5%</span></div>
+      <div class="row"><span class="k">Colour</span><span class="v" data-colour></span></div>
+      <div class="row"><span class="k">Position</span><span class="v">x 72 &middot; y 300 &middot; box 900 wide</span></div>
+      <div class="row"><span class="k">Shadow</span><span class="v">Black 45%, blur 22, y offset 3</span></div>
+    </div>
+    <p class="note">Layout A with the type taken down and the box opened up, so two words fit on a line without a forced break. Use it when A keeps splitting a phrase you want kept together.</p>
   </article>
 
 </div>
@@ -449,6 +487,7 @@ li{margin-bottom:7px}
     body:   '#EBEADC',
     accent: '#D5B8F0',
     back:   'turf',
+    caps:   true,
     kicker: 'Impact training'
   };
 
@@ -475,7 +514,7 @@ li{margin-bottom:7px}
   }
   function cased(raw, mode){
     if(mode === 'sentence') return sentenceCase(raw.toLowerCase());
-    if(mode === 'upper') return raw.toUpperCase();
+    if(mode === 'upper') return state.caps ? raw.toUpperCase() : raw;
     return raw;
   }
   function runs(text){
@@ -493,6 +532,10 @@ li{margin-bottom:7px}
     root.style.setProperty('--cap-accent', state.accent);
     root.style.setProperty('--cap-block-fg', blockText(state.accent));
     board.dataset.back = state.back;
+    board.dataset.caps = state.caps ? 'on' : 'off';
+    document.querySelectorAll('[data-case-label]').forEach(function(el){
+      el.textContent = state.caps ? 'uppercase' : 'as typed';
+    });
 
     document.querySelectorAll('[data-colour]').forEach(function(el){
       var cls = el.closest('.opt').classList;
@@ -583,6 +626,13 @@ li{margin-bottom:7px}
     backStrip.appendChild(b);
   });
 
+  var capsBtn = document.getElementById('capsBtn');
+  capsBtn.addEventListener('click', function(){
+    state.caps = capsBtn.getAttribute('aria-pressed') !== 'true';
+    capsBtn.setAttribute('aria-pressed', String(state.caps));
+    applyColours(); render(); save();
+  });
+
   var safeBtn = document.getElementById('safeBtn');
   safeBtn.addEventListener('click', function(){
     var on = safeBtn.getAttribute('aria-pressed') !== 'true';
@@ -622,6 +672,10 @@ li{margin-bottom:7px}
       case:'upper', family:'"Work Sans"', weight:900, size:136, tracking:-0.042, lh:0.88,
       x:72, y:280, w:820, invert:true,
       scrim:{ h:1020, from:'rgba(11,46,32,0.62)', mid:'rgba(11,46,32,0.34)' }
+    },
+    e: {
+      case:'upper', family:'"Work Sans"', weight:900, size:100, tracking:-0.035, lh:0.92,
+      x:72, y:300, w:900, shadow:{ c:'rgba(0,0,0,0.45)', blur:22, dy:3 }
     }
   };
 
@@ -835,7 +889,7 @@ li{margin-bottom:7px}
 
   document.querySelectorAll('button.dl').forEach(function(btn){
     var article = btn.closest('.opt');
-    var letter = ['a','b','c','d'].filter(function(l){ return article.classList.contains(l); })[0];
+    var letter = ['a','b','c','d','e'].filter(function(l){ return article.classList.contains(l); })[0];
     btn.addEventListener('click', function(){ download(letter, btn); });
   });
 
@@ -880,6 +934,7 @@ li{margin-bottom:7px}
     if(data.body) state.body = data.body;
     if(data.accent) state.accent = data.accent;
     if(data.back) state.back = data.back;
+    if(typeof data.caps === 'boolean') state.caps = data.caps;
     if(data.kicker) state.kicker = data.kicker;
     if(typeof data.headline === 'string' && data.headline) input.value = data.headline;
     if(Array.isArray(data.recent)) recent = data.recent;
@@ -889,7 +944,7 @@ li{margin-bottom:7px}
     try {
       localStorage.setItem(KEY, JSON.stringify({
         body: state.body, accent: state.accent, back: state.back,
-        kicker: state.kicker, headline: input.value, recent: recent
+        caps: state.caps, kicker: state.kicker, headline: input.value, recent: recent
       }));
     } catch(e){ /* storage off, the page still works */ }
   }
@@ -924,6 +979,7 @@ li{margin-bottom:7px}
   backStrip.querySelectorAll('.seg').forEach(function(b, i){
     b.setAttribute('aria-pressed', String(BACKDROPS[i].key === state.back));
   });
+  capsBtn.setAttribute('aria-pressed', String(state.caps));
   applyColours();
   autoGrow();
   render();
