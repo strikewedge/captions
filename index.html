@@ -213,6 +213,10 @@ button.preset:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
 }
 .d .hl{color:var(--cap-body)}
 
+/* centred: the text box sits in the middle of the frame and every line centres inside it */
+.board[data-align="centre"] .cap{left:50%; transform:translateX(-50%); text-align:center}
+.board[data-align="centre"] .c .rule{margin-left:auto; margin-right:auto}
+
 /* ---------- export and specs ---------- */
 .acts{display:flex; align-items:center; gap:11px; flex-wrap:wrap}
 button.dl{
@@ -273,9 +277,10 @@ li{margin-bottom:7px}
     <div class="segmented" id="backStrip"></div>
     <div class="segmented" style="margin-top:4px">
       <button class="tog" id="capsBtn" type="button" aria-pressed="true">Caps</button>
+      <button class="tog" id="centreBtn" type="button" aria-pressed="false">Centre</button>
       <button class="tog" id="safeBtn" type="button" aria-pressed="false">Safe zones</button>
     </div>
-    <p class="hint">Caps off renders the line exactly as you typed it. The brand toolkit headline (F) is all caps, so leave Caps on for it. Kicker (C) stays sentence case either way.</p>
+    <p class="hint">Centre puts every line in the middle of the frame, for lines like a sale headline with the offer underneath. Caps off renders the line exactly as you typed it. The brand toolkit headline (F) is all caps, so leave Caps on for it. Kicker (C) stays sentence case either way.</p>
   </div>
 
   <div class="group">
@@ -319,7 +324,7 @@ li{margin-bottom:7px}
       <div class="row"><span class="k">Type</span><span class="v">Work Sans 900, 128 px, <span data-case-label>uppercase</span></span></div>
       <div class="row"><span class="k">Metrics</span><span class="v">Line height 0.90 &middot; tracking &minus;3.5%</span></div>
       <div class="row"><span class="k">Colour</span><span class="v" data-colour></span></div>
-      <div class="row"><span class="k">Position</span><span class="v">x 72 &middot; y 300 &middot; box 760 wide</span></div>
+      <div class="row"><span class="k">Position</span><span class="v"><span data-x>x 72</span> &middot; y 300 &middot; box 760 wide</span></div>
       <div class="row"><span class="k">Shadow</span><span class="v">Black 45%, blur 24, y offset 3</span></div>
     </div>
     <p class="note">The default. Body colour carries the sentence and the accent colour marks one word. Start here unless you have a reason not to.</p>
@@ -343,7 +348,7 @@ li{margin-bottom:7px}
       <div class="row"><span class="k">Metrics</span><span class="v">Line height 1.18 &middot; tracking &minus;3%</span></div>
       <div class="row"><span class="k">Colour</span><span class="v" data-colour></span></div>
       <div class="row"><span class="k">Block</span><span class="v">Pad 18 side / 12 base &middot; radius 10</span></div>
-      <div class="row"><span class="k">Position</span><span class="v">x 72 &middot; y 310 &middot; box 800 wide</span></div>
+      <div class="row"><span class="k">Position</span><span class="v"><span data-x>x 72</span> &middot; y 310 &middot; box 800 wide</span></div>
     </div>
     <p class="note">The loudest option. The accent word sits in a solid block, so it holds up over busy footage where plain type would get lost.</p>
   </article>
@@ -366,7 +371,7 @@ li{margin-bottom:7px}
       <div class="row"><span class="k">Type</span><span class="v">Work Sans 800, 104 px, sentence case</span></div>
       <div class="row"><span class="k">Metrics</span><span class="v">Line height 1.00 &middot; tracking &minus;2.8%</span></div>
       <div class="row"><span class="k">Colour</span><span class="v" data-colour></span></div>
-      <div class="row"><span class="k">Position</span><span class="v">x 72 &middot; y 292 &middot; box 740 wide</span></div>
+      <div class="row"><span class="k">Position</span><span class="v"><span data-x>x 72</span> &middot; y 292 &middot; box 740 wide</span></div>
     </div>
     <p class="note">Sentence case and quieter. Suits teaching lines and carousels more than a scroll-stopper. The kicker is editable above.</p>
   </article>
@@ -390,7 +395,7 @@ li{margin-bottom:7px}
       <div class="row"><span class="k">Metrics</span><span class="v">Line height 0.88 &middot; tracking &minus;4.2%</span></div>
       <div class="row"><span class="k">Colour</span><span class="v" data-colour></span></div>
       <div class="row"><span class="k">Scrim</span><span class="v">#0B2E20 62% to 0%, top 1020 px</span></div>
-      <div class="row"><span class="k">Position</span><span class="v">x 72 &middot; y 280 &middot; box 820 wide</span></div>
+      <div class="row"><span class="k">Position</span><span class="v"><span data-x>x 72</span> &middot; y 280 &middot; box 820 wide</span></div>
     </div>
     <p class="note">Biggest, and the colours swap: the whole line takes the accent and the marked word drops back to the text colour. The scrim guarantees legibility on any footage.</p>
   </article>
@@ -412,7 +417,7 @@ li{margin-bottom:7px}
       <div class="row"><span class="k">Type</span><span class="v">Work Sans 900, 100 px, <span data-case-label>uppercase</span></span></div>
       <div class="row"><span class="k">Metrics</span><span class="v">Line height 0.92 &middot; tracking &minus;3.5%</span></div>
       <div class="row"><span class="k">Colour</span><span class="v" data-colour></span></div>
-      <div class="row"><span class="k">Position</span><span class="v">x 72 &middot; y 300 &middot; box 900 wide</span></div>
+      <div class="row"><span class="k">Position</span><span class="v"><span data-x>x 72</span> &middot; y 300 &middot; box 900 wide</span></div>
       <div class="row"><span class="k">Shadow</span><span class="v">Black 45%, blur 22, y offset 3</span></div>
     </div>
     <p class="note">Layout A with the type taken down and the box opened up, so two words fit on a line without a forced break. Use it when A keeps splitting a phrase you want kept together.</p>
@@ -435,7 +440,7 @@ li{margin-bottom:7px}
       <div class="row"><span class="k">Type</span><span class="v">Work Sans Bold (700), 120 px, <span data-case-label>uppercase</span></span></div>
       <div class="row"><span class="k">Metrics</span><span class="v">Line height 0.90 &middot; tracking &minus;5%</span></div>
       <div class="row"><span class="k">Colour</span><span class="v" data-colour></span></div>
-      <div class="row"><span class="k">Position</span><span class="v">x 72 &middot; y 300 &middot; box 860 wide</span></div>
+      <div class="row"><span class="k">Position</span><span class="v"><span data-x>x 72</span> &middot; y 300 &middot; box 860 wide</span></div>
       <div class="row"><span class="k">Shadow</span><span class="v">Black 45%, blur 24, y offset 3</span></div>
     </div>
     <p class="note">The main heading style from the brand toolkit: Work Sans Bold, all caps, letter spacing &minus;50, line spacing 0.9. Use it when the caption should match the headlines on the website, packaging and emails. Leave the asterisks out for a single-colour line.</p>
@@ -522,6 +527,7 @@ li{margin-bottom:7px}
     accent: '#D5B8F0',
     back:   'turf',
     caps:   true,
+    align:  'left',
     kicker: 'Impact training'
   };
 
@@ -567,6 +573,10 @@ li{margin-bottom:7px}
     root.style.setProperty('--cap-block-fg', blockText(state.accent));
     board.dataset.back = state.back;
     board.dataset.caps = state.caps ? 'on' : 'off';
+    board.dataset.align = state.align;
+    document.querySelectorAll('[data-x]').forEach(function(el){
+      el.textContent = state.align === 'centre' ? 'centred' : 'x 72';
+    });
     document.querySelectorAll('[data-case-label]').forEach(function(el){
       el.textContent = state.caps ? 'uppercase' : 'as typed';
     });
@@ -665,6 +675,13 @@ li{margin-bottom:7px}
     state.caps = capsBtn.getAttribute('aria-pressed') !== 'true';
     capsBtn.setAttribute('aria-pressed', String(state.caps));
     applyColours(); render(); save();
+  });
+
+  var centreBtn = document.getElementById('centreBtn');
+  centreBtn.addEventListener('click', function(){
+    state.align = state.align === 'centre' ? 'left' : 'centre';
+    centreBtn.setAttribute('aria-pressed', String(state.align === 'centre'));
+    applyColours(); save();
   });
 
   var safeBtn = document.getElementById('safeBtn');
@@ -781,6 +798,7 @@ li{margin-bottom:7px}
     }
 
     var top = spec.y;
+    var centred = state.align === 'centre';
 
     if(spec.kicker){
       var k = spec.kicker;
@@ -792,7 +810,9 @@ li{margin-bottom:7px}
       ctx.globalAlpha = k.alpha;
       ctx.fillStyle = bodyCol;
       setShadow(ctx, null);
-      ctx.fillText(state.kicker.toUpperCase(), spec.x, kBase);
+      var kText = state.kicker.toUpperCase();
+      var kx = centred ? (1080 - ctx.measureText(kText).width) / 2 : spec.x;
+      ctx.fillText(kText, kx, kBase);
       ctx.globalAlpha = 1;
       top += kBox + k.gap;
     }
@@ -800,7 +820,7 @@ li{margin-bottom:7px}
     if(spec.rule){
       ctx.fillStyle = state.accent;
       setShadow(ctx, null);
-      ctx.fillRect(spec.x, top, spec.rule.w, spec.rule.h);
+      ctx.fillRect(centred ? (1080 - spec.rule.w) / 2 : spec.x, top, spec.rule.w, spec.rule.h);
       top += spec.rule.h + spec.rule.gap;
     }
 
@@ -829,6 +849,16 @@ li{margin-bottom:7px}
         placed.push({ tok: tok, x: x, w: w });
         x += w + (boxed ? padX : 0);
       });
+
+      // Centred: shift the whole line so its ink sits in the middle of the frame.
+      if(centred){
+        var endX = spec.x;
+        placed.forEach(function(p){
+          if(!p.tok.sp) endX = p.x + p.w + (padX && p.tok.a ? padX : 0);
+        });
+        var shift = (1080 - (endX - spec.x)) / 2 - spec.x;
+        placed.forEach(function(p){ p.x += shift; });
+      }
 
       if(spec.block){
         setShadow(ctx, spec.shadow);
@@ -901,7 +931,7 @@ li{margin-bottom:7px}
         if(!blob) return;
 
         var url = URL.createObjectURL(blob);
-        var name = 'caption-' + letter + '-' + nameOf(state.accent).toLowerCase() +
+        var name = 'caption-' + letter + (state.align === 'centre' ? '-centre' : '') + '-' + nameOf(state.accent).toLowerCase() +
                    '-' + slug(raw) + '.png';
 
         var a = document.createElement('a');
@@ -974,6 +1004,7 @@ li{margin-bottom:7px}
     if(data.accent) state.accent = data.accent;
     if(data.back) state.back = data.back;
     if(typeof data.caps === 'boolean') state.caps = data.caps;
+    if(data.align === 'centre' || data.align === 'left') state.align = data.align;
     if(data.kicker) state.kicker = data.kicker;
     if(typeof data.headline === 'string' && data.headline) input.value = data.headline;
     if(Array.isArray(data.recent)) recent = data.recent;
@@ -983,7 +1014,7 @@ li{margin-bottom:7px}
     try {
       localStorage.setItem(KEY, JSON.stringify({
         body: state.body, accent: state.accent, back: state.back,
-        caps: state.caps, kicker: state.kicker, headline: input.value, recent: recent
+        caps: state.caps, align: state.align, kicker: state.kicker, headline: input.value, recent: recent
       }));
     } catch(e){ /* storage off, the page still works */ }
   }
@@ -1019,6 +1050,7 @@ li{margin-bottom:7px}
     b.setAttribute('aria-pressed', String(BACKDROPS[i].key === state.back));
   });
   capsBtn.setAttribute('aria-pressed', String(state.caps));
+  centreBtn.setAttribute('aria-pressed', String(state.align === 'centre'));
   applyColours();
   autoGrow();
   render();
