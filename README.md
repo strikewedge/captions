@@ -7,8 +7,8 @@ Type a headline, pick a layout and a colour, download it as a transparent
 
 **Live: https://strikewedge.github.io/captions**
 
-- Five layouts: Stacked, Highlight block, Kicker, Full colour, Stacked smaller (same face as A, sized so two words fit on a line).
-- Caps toggle: on renders A, B, D and E uppercase; off renders the line as typed. Kicker stays sentence case.
+- Six layouts: Stacked, Highlight block, Kicker, Full colour, Stacked smaller (same face as A, sized so two words fit on a line), and Brand toolkit headline (Work Sans Bold, all caps, tracking -5%, line height 0.9, the main heading style from the brand toolkit).
+- Caps toggle: on renders A, B, D, E and F uppercase; off renders the line as typed. Kicker stays sentence case.
 - Text and accent colour picked from the brand palette (beige, lilac, orange, green).
 - Backdrop switcher (turf, dark, bright) to check contrast before committing. Preview only, never exported.
 - Wrap a word in asterisks to make it the accent word, e.g. `Never *scoop* the ball again`.
